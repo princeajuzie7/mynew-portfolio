@@ -1,0 +1,11 @@
+"use client";
+export * from "@/components/ProfileCard";
+export * from "@/components/Hero-section";
+export * from "@/components/Myservices-section";
+export * from "@/components/Rating-section";
+export * from "@/components/Works-section";
+export * from "@/components/MyBackground-section";
+export * from "@/components/Mynewsletter-section";
+export * from "@/components/Contact-section";
+export * from "@/components/Creteria-section";
+export * from "@/components/Footer-section";
