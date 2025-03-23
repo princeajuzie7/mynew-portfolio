@@ -2,156 +2,195 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Poppins Font */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
 
-/* Courier Prime Font */
-@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
 
-* {
-  font-family: "Poppins", sans-serif;
-}
-::after,
-::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
 
-  letter-spacing: 0.5px;
-  font-smooth: subpixel-antialiased;
-}
-body {
-  color: #8c8c8e;
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  font-size: 12px;
-  -webkit-transition: 0.4s ease-in-out;
-  transition: 0.4s ease-in-out;
-}
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
 
-.App {
-  width: 500px;
-  max-width: 90vw;
-  margin: 20px auto 0;
-  height: 1500px;
-}
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
 
-.swiper {
-  width: 100%;
-  height: 100%;
-  /* background: orange; */
-  max-width: 900px;
-  margin: 0;
-}
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
 
-.swiper-slide {
-  font-size: 18px;
-  padding-block: 20px;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
 
-  /* Center slide text vertically */
-  width: 200px;
-}
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
 
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
 
-/* .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-} */
+    --radius: 0.75rem;
+  }
 
-.swiper {
-  width: auto;
-  height: auto;
-  max-width: 900px;
-  margin: 20px auto;
-  padding-inline: 20px;
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
 }
 
-.inputfocus:focus + label {
-  background: #ffc107;
-  color: #20202a;
-  transition: 0.4s ease-in-out;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
 
-.artinput {
-  position: relative;
-  margin-bottom: 30px;
-  transition: 0.4s ease-in-out;
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-dot-pattern {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .dark .bg-dot-pattern {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  }
+
+  .bg-dot-pattern-dense {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 10px 10px;
+  }
+
+  .dark .bg-dot-pattern-dense {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  }
 }
 
-.swiper-wrapper {
-  position: relative;
-  width: fit-content;
-  transform: translate3d(-394px, 0px, 0px);
-  transition-duration: 0ms;
-  height: 100%;
-  z-index: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-transition-property: -webkit-transform;
-  transition-property: -webkit-transform;
-  transition-property: transform;
-  transition-property: transform, -webkit-transform;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-
-  /* background-color: green; */
-}
-
-.art-info-bar-btn {
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
-  margin-left: auto;
-  pointer-events: all;
-  font-size: 14px;
-  padding: 30px;
-}
-.hand-menu {
-  transform: translateX(0);
-}
-.art-notactive {
-  transform: translateX(0px);
-  transition: 0.55s ease-in-out;
-}
-.art-active {
-  transform: translateX(290px);
-  position: absolute;
-  transition: 0.1s ease-in-out;
-}
-
-.filter-container {
-  position: relative;
-  height: max-content !important;
-}
-.filter-item {
-  position: unset !important;
-}
-
-.art-info-bar {
-  transition: 0.55s ease-in-out;
-  background-color: #ffc107;
-}
-.use-theme-bg {
-  background-color: #2d2d39 !important;
-}
-
+/* Modern scrollbar */
 ::-webkit-scrollbar {
-  margin-top: 2px;
   width: 6px;
-  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #20202a;
+  @apply bg-transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #ffc107;
-  border-radius: 10px;
+  @apply bg-muted-foreground/10 rounded-full;
 }
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/20;
+}
+
+/* Text selection */
+::selection {
+  @apply bg-primary/10 text-primary;
+}
+
+/* Parallax text */
+.parallax {
+  overflow: hidden;
+  letter-spacing: -1px;
+  line-height: 0.8;
+  margin: 0;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.parallax .scroller {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 32px;
+  display: flex;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.parallax span {
+  display: block;
+  margin-right: 30px;
+}
+
+/* Add to the end of the file */
+
+/* Dock animations and effects */
+@keyframes pulse-subtle {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.dock-indicator {
+  animation: pulse-subtle 2s infinite ease-in-out;
+}
+
+/* Improved tooltip animations */
+.tooltip-enter {
+  opacity: 0;
+  transform: scale(0.95) translateY(5px);
+}
+
+.tooltip-enter-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.tooltip-exit {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.tooltip-exit-active {
+  opacity: 0;
+  transform: scale(0.95) translateY(5px);
+  transition: opacity 150ms, transform 150ms;
+}
+
