@@ -19,8 +19,8 @@ export async function POST(req: Request) {
     }
 
     const data = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["princeajuzie1@gmail.com"],
+      from: "<onboarding@resend.dev>",
+      to: 'prince.ajuzie@iauoe.edu.ng',
       subject: `New Contact Form Submission from ${name}`,
       text: `
 Name: ${name}
@@ -32,7 +32,7 @@ Message: ${message}
 
     return NextResponse.json({ message: "Email sent successfully" }, { status: 200 })
   } catch (error) {
-    console.error("Email sending failed:", error)
+    console.log("Email sending failed:", error)
     return NextResponse.json({ error: "Failed to send email" }, { status: 500 })
   }
 }

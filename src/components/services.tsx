@@ -81,7 +81,7 @@ export default function Services() {
       ref={ref}
       className="py-24 lg:px-4 px-0 bg-dot-pattern"
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto lg:px-0 px-0">
         <motion.div
           variants={containerVariants}
           initial="hidden"

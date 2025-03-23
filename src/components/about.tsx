@@ -30,7 +30,7 @@ export default function About() {
     <section id="about" ref={ref} className="py-24 lg:px-4 px-0 relative">
       <div className="absolute inset-0 bg-dot-pattern"></div>
 
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto relative lg:px-0 px-4 z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"

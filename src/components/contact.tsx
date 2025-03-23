@@ -64,6 +64,7 @@ export default function Contact() {
         throw new Error("Failed to send message")
       }
     } catch (error) {
+      console.log("error", error )
       toast({
         title: "Error",
         description: "There was a problem sending your message. Please try again.",
@@ -99,9 +100,9 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="py-24 lg:px-4 px-0 bg-dot-pattern"
+      className="py-24 bg-dot-pattern"
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto lg:px-0 px-2">
         <motion.div
           variants={containerVariants}
           initial="hidden"
