@@ -54,8 +54,7 @@ export default function Contact() {
     setIsSubmitting(true)
     setFormError(null)
 
-    const { name, email, message } = formData
-    console.log("name", name, email, message)
+    const { name, email, message } = formData;
 
     try {
       const response = await fetch("/api/send-email", {

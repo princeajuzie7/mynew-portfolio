@@ -22,15 +22,15 @@ export async function POST(req: Request) {
     }
 
     const data = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>", // Correct format: "Name <email>"
-      to: ["prince.ajuzie@iauoe.edu.ng"],
+      from: "Portfolio Contact <onboarding@resend.dev>", 
+      to: ["prince.ajuzie@iauoe.edu.ng", "princeajuzie1@gmail.com"],
       subject: `New Contact Form Submission from ${name}`,
       text: `
 Name: ${name}
 Email: ${email}
 Message: ${message}
       `,
-      reply_to: email, // Use reply_to instead of replyTo
+      replyTo: email, 
     })
 
     if (data.error) {
