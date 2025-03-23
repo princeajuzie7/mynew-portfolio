@@ -16,7 +16,12 @@ export default function Contact() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
-
+  const [formError, setFormError] = useState<string | null>(null)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  })
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -36,14 +41,21 @@ export default function Contact() {
     },
   }
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }))
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setFormError(null)
 
-    const formData = new FormData(e.currentTarget)
-    const name = formData.get("name") as string
-    const email = formData.get("email") as string
-    const message = formData.get("message") as string
+    const { name, email, message } = formData
+    console.log("name", name, email, message)
 
     try {
       const response = await fetch("/api/send-email", {
@@ -54,17 +66,26 @@ export default function Contact() {
         body: JSON.stringify({ name, email, message }),
       })
 
+      const data = await response.json()
+
       if (response.ok) {
         toast({
           title: "Message sent!",
           description: "Thank you for your message. I'll get back to you soon.",
         })
-        e.currentTarget.reset()
+        setFormData({ name: "", email: "", message: "" })
       } else {
-        throw new Error("Failed to send message")
+        console.error("Error response:", data)
+        setFormError(data.error || "Failed to send message. Please try again.")
+        toast({
+          title: "Error",
+          description: data.error || "Failed to send message. Please try again.",
+          variant: "destructive",
+        })
       }
     } catch (error) {
-      console.log("error", error )
+      console.error("Submission error:", error)
+      setFormError("Network error. Please check your connection and try again.")
       toast({
         title: "Error",
         description: "There was a problem sending your message. Please try again.",
@@ -94,14 +115,10 @@ export default function Contact() {
       value: "San Francisco, CA",
       link: "https://maps.google.com",
     },
-  ];
+  ]
 
   return (
-    <section
-      id="contact"
-      ref={ref}
-      className="py-24 bg-dot-pattern"
-    >
+    <section id="contact" ref={ref} className="py-24 bg-dot-pattern">
       <div className="container mx-auto lg:px-0 px-2">
         <motion.div
           variants={containerVariants}
@@ -116,15 +133,11 @@ export default function Contact() {
               </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-              Have a project in mind or want to discuss potential opportunities?
-              Feel free to reach out!
+              Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
             </p>
           </motion.div>
 
-          <motion.div
-            variants={itemVariants}
-            className="grid md:grid-cols-2 gap-12"
-          >
+          <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-12">
             <Card className="bg-card/50 hover:bg-card/80 transition-all duration-300 border-none overflow-hidden">
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -137,6 +150,8 @@ export default function Contact() {
                       placeholder="Your name"
                       required
                       className="bg-background/50"
+                      value={formData.name}
+                      onChange={handleChange}
                     />
                   </div>
 
@@ -150,6 +165,8 @@ export default function Contact() {
                       placeholder="Your email"
                       required
                       className="bg-background/50"
+                      value={formData.email}
+                      onChange={handleChange}
                     />
                   </div>
 
@@ -163,6 +180,8 @@ export default function Contact() {
                       rows={5}
                       required
                       className="bg-background/50"
+                      value={formData.message}
+                      onChange={handleChange}
                     />
                   </div>
 
@@ -207,9 +226,7 @@ export default function Contact() {
             </Card>
 
             <div className="space-y-8">
-              <h3 className="text-xl font-semibold mb-6">
-                Contact Information
-              </h3>
+              <h3 className="text-xl font-semibold mb-6">Contact Information</h3>
 
               <div className="space-y-4">
                 {contactInfo.map((info, index) => (
@@ -255,12 +272,8 @@ export default function Contact() {
 
               <div className="pt-8">
                 <blockquote className="border-l-2 border-primary pl-4 italic">
-                  <p className="text-lg mb-2">
-                    "Great experiences come from controlling the entire stack."
-                  </p>
-                  <footer className="text-sm text-muted-foreground">
-                    — Steve Jobs
-                  </footer>
+                  <p className="text-lg mb-2">"Great experiences come from controlling the entire stack."</p>
+                  <footer className="text-sm text-muted-foreground">— Steve Jobs</footer>
                 </blockquote>
               </div>
             </div>
@@ -268,6 +281,6 @@ export default function Contact() {
         </motion.div>
       </div>
     </section>
-  );
+  )
 }
 
