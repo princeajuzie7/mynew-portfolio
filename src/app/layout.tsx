@@ -134,9 +134,9 @@ export default function RootLayout({
           <StructuredData />
           <main id="main-content">{children}</main>
           <Toaster />
+        </ThemeProvider>
           <Analytics />
           <SpeedInsights />
-        </ThemeProvider>
       </body>
     </html>
   );
