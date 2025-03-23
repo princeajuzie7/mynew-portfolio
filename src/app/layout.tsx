@@ -107,6 +107,10 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        <meta
+          name="google-site-verification"
+          content="BxupqRmfA6MnqmUegG4C2j7S05ByaiE3aR1am9SnZdY"
+        />
         <meta name="application-name" content="Prince Ajuzie Portfolio" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -115,7 +119,12 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-background focus:z-[100]"
@@ -130,6 +139,6 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
 
